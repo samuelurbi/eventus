@@ -89,8 +89,9 @@ export default function OnboardingLayout({
         </div>
       </aside>
 
-      {/* Pregunta — panel claro */}
-      <main className="flex w-full flex-col bg-offwhite lg:w-[62%]">
+      {/* Pregunta — panel claro (flex-1 para rellenar el espacio restante;
+          el panel de marca está capado a 420px, así que un 62% fijo dejaba hueco) */}
+      <main className="flex w-full flex-col bg-offwhite lg:flex-1">
         {/* topbar móvil */}
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:hidden">
           <Logo size={24} className="text-navy" />
