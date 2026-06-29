@@ -16,7 +16,7 @@ export const EVENTOS = [
     id: 1,
     nombre: 'Boda Martínez & López',
     fecha: '14 sep 2026',
-    lugar: 'Hacienda San Juan, CDMX',
+    lugar: 'Hacienda San Juan, Sevilla',
     tipo: 'Boda',
     presupuesto: 280000,
     gastado: 196000,
@@ -25,9 +25,9 @@ export const EVENTOS = [
   },
   {
     id: 2,
-    nombre: 'Convención Anual TechMX',
+    nombre: 'Convención Anual TechES',
     fecha: '22 oct 2026',
-    lugar: 'Centro Banamex, CDMX',
+    lugar: 'Palacio de Congresos, Madrid',
     tipo: 'Corporativo',
     presupuesto: 750000,
     gastado: 120000,
@@ -38,7 +38,7 @@ export const EVENTOS = [
     id: 3,
     nombre: 'XV Años Sofía Ramírez',
     fecha: '5 nov 2026',
-    lugar: 'Salón Imperial, Guadalajara',
+    lugar: 'Salón Imperial, Valencia',
     tipo: 'Fiesta',
     presupuesto: 95000,
     gastado: 42000,
@@ -70,8 +70,8 @@ export const TAREAS = [
 export const ACTIVIDAD = [
   { id: 1, tipo: 'mensaje',    icon: 'msg',    texto: 'Estudio Lumière envió una propuesta de álbum', tiempo: '10 min' },
   { id: 2, tipo: 'proveedor',  icon: 'user',   texto: 'DJ Soundtrack confirmó disponibilidad para sep 14', tiempo: '1 h' },
-  { id: 3, tipo: 'pago',       icon: 'wallet', texto: 'Anticipo de $25,000 registrado — Boda Martínez', tiempo: '3 h' },
-  { id: 4, tipo: 'evento',     icon: 'cal',    texto: 'Convención TechMX añadida al calendario', tiempo: 'Ayer' },
+  { id: 3, tipo: 'pago',       icon: 'wallet', texto: 'Anticipo de 25.000 € registrado — Boda Martínez', tiempo: '3 h' },
+  { id: 4, tipo: 'evento',     icon: 'cal',    texto: 'Convención TechES añadida al calendario', tiempo: 'Ayer' },
   { id: 5, tipo: 'documento',  icon: 'file',   texto: 'Contrato de locación subido — Hacienda San Juan', tiempo: 'Ayer' },
 ]
 
@@ -79,14 +79,14 @@ export const ACTIVIDAD = [
 export const CATEGORIAS = ['Todos', 'Fotografía', 'Catering', 'Música', 'Decoración', 'Locación', 'Transporte']
 
 export const PROVEEDORES = [
-  { id: 1, nombre: 'Estudio Lumière',   categoria: 'Fotografía',  rating: 4.9, reviews: 128, desde: 18000, ubicacion: 'CDMX',        estado: 'Contratado', avatar: 'EL', destacado: true },
-  { id: 2, nombre: 'Banquetes Díaz',    categoria: 'Catering',    rating: 4.7, reviews: 94,  desde: 350,   unidad: '/persona', ubicacion: 'CDMX', estado: 'Cotización', avatar: 'BD' },
-  { id: 3, nombre: 'DJ Soundtrack',     categoria: 'Música',      rating: 4.8, reviews: 76,  desde: 12000, ubicacion: 'Guadalajara', estado: 'Pendiente',  avatar: 'DS' },
-  { id: 4, nombre: 'Flores & Arte',     categoria: 'Decoración',  rating: 4.6, reviews: 52,  desde: 9000,  ubicacion: 'CDMX',        estado: 'Contratado', avatar: 'FA' },
-  { id: 5, nombre: 'Hacienda San Juan', categoria: 'Locación',    rating: 4.9, reviews: 210, desde: 85000, ubicacion: 'Edo. Méx.',   estado: 'Contratado', avatar: 'HS', destacado: true },
-  { id: 6, nombre: 'Banquetes Real',    categoria: 'Catering',    rating: 4.5, reviews: 61,  desde: 290,   unidad: '/persona', ubicacion: 'Puebla', estado: 'Disponible', avatar: 'BR' },
-  { id: 7, nombre: 'Luxe Transport',    categoria: 'Transporte',  rating: 4.4, reviews: 38,  desde: 6500,  ubicacion: 'CDMX',        estado: 'Disponible', avatar: 'LT' },
-  { id: 8, nombre: 'Quinteto Aurora',   categoria: 'Música',      rating: 5.0, reviews: 41,  desde: 22000, ubicacion: 'CDMX',        estado: 'Disponible', avatar: 'QA', destacado: true },
+  { id: 1, nombre: 'Estudio Lumière',   categoria: 'Fotografía',  rating: 4.9, reviews: 128, desde: 18000, ubicacion: 'Madrid',        estado: 'Contratado', avatar: 'EL', destacado: true },
+  { id: 2, nombre: 'Banquetes Díaz',    categoria: 'Catering',    rating: 4.7, reviews: 94,  desde: 350,   unidad: '/persona', ubicacion: 'Madrid', estado: 'Cotización', avatar: 'BD' },
+  { id: 3, nombre: 'DJ Soundtrack',     categoria: 'Música',      rating: 4.8, reviews: 76,  desde: 12000, ubicacion: 'Valencia', estado: 'Pendiente',  avatar: 'DS' },
+  { id: 4, nombre: 'Flores & Arte',     categoria: 'Decoración',  rating: 4.6, reviews: 52,  desde: 9000,  ubicacion: 'Madrid',        estado: 'Contratado', avatar: 'FA' },
+  { id: 5, nombre: 'Hacienda San Juan', categoria: 'Locación',    rating: 4.9, reviews: 210, desde: 85000, ubicacion: 'Toledo',   estado: 'Contratado', avatar: 'HS', destacado: true },
+  { id: 6, nombre: 'Banquetes Real',    categoria: 'Catering',    rating: 4.5, reviews: 61,  desde: 290,   unidad: '/persona', ubicacion: 'Sevilla', estado: 'Disponible', avatar: 'BR' },
+  { id: 7, nombre: 'Luxe Transport',    categoria: 'Transporte',  rating: 4.4, reviews: 38,  desde: 6500,  ubicacion: 'Madrid',        estado: 'Disponible', avatar: 'LT' },
+  { id: 8, nombre: 'Quinteto Aurora',   categoria: 'Música',      rating: 5.0, reviews: 41,  desde: 22000, ubicacion: 'Madrid',        estado: 'Disponible', avatar: 'QA', destacado: true },
 ]
 
 // ── Detalle de proveedor (mock compartido) ──────────────────────────────────
@@ -95,7 +95,7 @@ export const PROVEEDOR_SERVICIOS = [
   { titulo: 'Personal cualificado',   desc: 'Equipo profesional con experiencia' },
   { titulo: 'Montaje completo',       desc: 'Instalación y desmontaje incluidos' },
   { titulo: 'Opciones especiales',    desc: 'Alternativas para todos los gustos' },
-  { titulo: 'Cobertura amplia',       desc: 'Disponible en CDMX y zona metropolitana' },
+  { titulo: 'Cobertura amplia',       desc: 'Disponible en Madrid y zona metropolitana' },
   { titulo: 'Certificaciones',        desc: 'Cumple normativas y seguros vigentes' },
 ]
 export const PROVEEDOR_PAQUETES = [
@@ -125,9 +125,9 @@ export const DOCUMENTOS = [
   { id: 2, nombre: 'Menú degustación.pdf',             tipo: 'pdf', tam: '1.1 MB', evento: 'Boda Martínez & López',    fecha: '26 jun 2026' },
   { id: 3, nombre: 'Cotización fotografía.xlsx',       tipo: 'xls', tam: '88 KB',  evento: 'Boda Martínez & López',    fecha: '24 jun 2026' },
   { id: 4, nombre: 'Lista de invitados.xlsx',          tipo: 'xls', tam: '140 KB', evento: 'XV Años Sofía Ramírez',    fecha: '22 jun 2026' },
-  { id: 5, nombre: 'Brief del evento.docx',            tipo: 'doc', tam: '320 KB', evento: 'Convención Anual TechMX',  fecha: '20 jun 2026' },
+  { id: 5, nombre: 'Brief del evento.docx',            tipo: 'doc', tam: '320 KB', evento: 'Convención Anual TechES',  fecha: '20 jun 2026' },
   { id: 6, nombre: 'Render decoración.jpg',            tipo: 'img', tam: '3.8 MB', evento: 'Boda Martínez & López',    fecha: '18 jun 2026' },
-  { id: 7, nombre: 'Plano del salón.pdf',              tipo: 'pdf', tam: '900 KB', evento: 'Convención Anual TechMX',  fecha: '15 jun 2026' },
+  { id: 7, nombre: 'Plano del salón.pdf',              tipo: 'pdf', tam: '900 KB', evento: 'Convención Anual TechES',  fecha: '15 jun 2026' },
 ]
 
 // ── Detalle de evento (datos por evento, mock compartido) ────────────────────
@@ -179,8 +179,8 @@ export const REFERIDOS_STATS = {
   meta: 20,
   registrados: 8,
   conEvento: 5,
-  creditos: 2500,        // MXN disponibles
-  porReferido: 500,      // MXN por referido con evento creado
+  creditos: 2500,        // € disponibles
+  porReferido: 500,      // € por referido con evento creado
 }
 export const REFERIDOS = [
   { id: 1, nombre: 'Carlos Ruiz',     email: 'carlos.ruiz@email.com',     estado: 'Evento creado', fecha: '15 ene 2026', credito: 500 },

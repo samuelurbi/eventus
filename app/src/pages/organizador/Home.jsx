@@ -8,7 +8,7 @@ import {
 import { EVENTOS, MENSAJES, TAREAS, ACTIVIDAD, SPARKLINES } from '../../data/mock'
 import { usePageHeader } from '../../layouts/pageHeader'
 
-const FMT = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 })
+const FMT = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 
 // ── Identidad visual por tipo de evento ──────────────────────────────────────
 const UNSPLASH = (id, w) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`
@@ -321,7 +321,7 @@ export default function Home() {
         <div className="grid grid-cols-2 grid-rows-2 gap-4">
           <MiniStat icon={<CalendarDays size={17} strokeWidth={1.8} />} label="Eventos activos" value="3" trend="+1" trendUp sparkKey="eventos" to="/organizador/eventos" />
           <MiniStat icon={<Users size={17} strokeWidth={1.8} />} label="Proveedores" value="16" trend="+2" trendUp sparkKey="proveedores" to="/organizador/proveedores" />
-          <MiniStat icon={<Wallet size={17} strokeWidth={1.8} />} label="Presupuesto" value="$358K" trend="32%" trendUp sparkKey="presupuesto" to="/organizador/presupuesto" />
+          <MiniStat icon={<Wallet size={17} strokeWidth={1.8} />} label="Presupuesto" value="358 K€" trend="32%" trendUp sparkKey="presupuesto" to="/organizador/presupuesto" />
           <MiniStat icon={<MessageSquare size={17} strokeWidth={1.8} />} label="Sin leer" value={`${noLeidos}`} trend="2 urgentes" trendUp={false} sparkKey="mensajes" to="/organizador/mensajes" />
         </div>
       </div>

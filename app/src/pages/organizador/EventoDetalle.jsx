@@ -283,7 +283,7 @@ function TabPresupuesto({ evento }) {
         <div className="flex flex-col gap-4 p-5">
           <label className="block"><span className="mb-1.5 block text-[12px] font-semibold text-ink-strong">Categoría</span><input className={inputCls} placeholder="Ej. Iluminación" /></label>
           <label className="block"><span className="mb-1.5 block text-[12px] font-semibold text-ink-strong">Proveedor (opcional)</span><input className={inputCls} placeholder="Nombre del proveedor" /></label>
-          <label className="block"><span className="mb-1.5 block text-[12px] font-semibold text-ink-strong">Monto estimado (MXN)</span><input type="number" className={inputCls} placeholder="Ej. 15000" /></label>
+          <label className="block"><span className="mb-1.5 block text-[12px] font-semibold text-ink-strong">Monto estimado (€)</span><input type="number" className={inputCls} placeholder="Ej. 15000" /></label>
         </div>
       </Modal>
     </div>

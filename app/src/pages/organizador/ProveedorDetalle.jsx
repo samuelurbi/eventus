@@ -24,7 +24,7 @@ function Stars({ rating, size = 13 }) {
 const INFO = [
   { Icon: Clock, label: 'Tiempo de respuesta', val: 'Menos de 24 h' },
   { Icon: CalendarCheck, label: 'Disponibilidad', val: 'Todo el año' },
-  { Icon: MapPin, label: 'Zona de servicio', val: 'CDMX y zona metro' },
+  { Icon: MapPin, label: 'Zona de servicio', val: 'Madrid y alrededores' },
   { Icon: Users, label: 'Capacidad', val: '20 a 500 personas' },
   { Icon: Globe, label: 'Idiomas', val: 'Español, Inglés' },
 ]

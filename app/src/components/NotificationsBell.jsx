@@ -16,10 +16,10 @@ const ICONO = {
 // Notificaciones del organizador
 export const NOTIF_ORG = [
   { id: 1, tipo: 'mensaje', titulo: 'Estudio Lumière', texto: 'Te envió una propuesta de álbum.', tiempo: 'Hace 10 min', leida: false },
-  { id: 2, tipo: 'presupuesto', titulo: 'Banquetes Díaz', texto: 'Nuevo presupuesto de menú · $64,000.', tiempo: 'Hace 2 h', leida: false },
+  { id: 2, tipo: 'presupuesto', titulo: 'Banquetes Díaz', texto: 'Nuevo presupuesto de menú · 64.000 €.', tiempo: 'Hace 2 h', leida: false },
   { id: 3, tipo: 'confirmacion', titulo: 'DJ Soundtrack', texto: 'Confirmó disponibilidad para el 14 sep.', tiempo: 'Hace 3 h', leida: false },
-  { id: 4, tipo: 'pago', titulo: 'Pago registrado', texto: 'Anticipo de $25,000 — Boda Martínez.', tiempo: 'Ayer', leida: true },
-  { id: 5, tipo: 'evento', titulo: 'Convención TechMX', texto: 'Se añadió al calendario.', tiempo: 'Ayer', leida: true },
+  { id: 4, tipo: 'pago', titulo: 'Pago registrado', texto: 'Anticipo de 25.000 € — Boda Martínez.', tiempo: 'Ayer', leida: true },
+  { id: 5, tipo: 'evento', titulo: 'Convención TechES', texto: 'Se añadió al calendario.', tiempo: 'Ayer', leida: true },
 ]
 
 // Notificaciones del proveedor

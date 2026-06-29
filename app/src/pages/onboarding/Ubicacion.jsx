@@ -2,7 +2,7 @@ import { useState } from 'react'
 import OnboardingLayout from '../../layouts/OnboardingLayout'
 import Input from '../../components/Input'
 
-const POPULARES = ['Ciudad de México', 'Guadalajara', 'Monterrey', 'Puebla', 'Querétaro', 'Cancún', 'Mérida', 'Tijuana']
+const POPULARES = ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao', 'Málaga', 'Zaragoza', 'Granada']
 
 export default function Ubicacion() {
   const [ciudad, setCiudad] = useState('')

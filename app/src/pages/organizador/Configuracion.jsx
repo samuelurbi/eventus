@@ -66,14 +66,14 @@ function TabDatos() {
             <Field label="Teléfono"><input className={inputCls} defaultValue="+52 55 1234 5678" /></Field>
             <Field label="Tipo de organizador"><select className={inputCls}><option>Particular</option><option>Empresa</option></select></Field>
           </div>
-          <Field label="Dirección"><input className={inputCls} defaultValue="Av. Reforma 123" /></Field>
+          <Field label="Dirección"><input className={inputCls} defaultValue="Calle Gran Vía 28" /></Field>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            <input className={inputCls} defaultValue="Ciudad de México" /><input className={inputCls} defaultValue="06600" /><input className={inputCls} defaultValue="México" />
+            <input className={inputCls} defaultValue="Madrid" /><input className={inputCls} defaultValue="28013" /><input className={inputCls} defaultValue="España" />
           </div>
           <Field label="Sobre mí" hint="Máximo 500 caracteres."><textarea rows={3} className={cls(inputCls, 'h-auto py-2')} placeholder="Cuéntanos sobre ti y tu experiencia organizando eventos…" /></Field>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Idioma"><select className={inputCls}><option>Español</option><option>English</option></select></Field>
-            <Field label="Zona horaria"><select className={inputCls}><option>GMT-6 (Ciudad de México)</option><option>GMT-5 (Cancún)</option></select></Field>
+            <Field label="Zona horaria"><select className={inputCls}><option>GMT+1 (Madrid)</option><option>GMT+0 (Canarias)</option></select></Field>
           </div>
           <div className="flex justify-end gap-3 border-t border-gray-100 pt-5"><BtnOutline>Cancelar</BtnOutline><BtnPrimary>Guardar cambios</BtnPrimary></div>
         </div>
@@ -92,9 +92,9 @@ function TabDatos() {
 // ── Seguridad ──────────────────────────────────────────────────────────────
 const PW_CHECKS = ['Al menos 8 caracteres', 'Mayúsculas y minúsculas', 'Incluye números', 'Caracteres especiales (opcional)']
 const SESIONES = [
-  { disp: 'Windows · Chrome', lugar: 'CDMX, México', cuando: 'Actividad ahora', actual: true },
-  { disp: 'iPhone · Safari', lugar: 'CDMX, México', cuando: 'Hace 2 horas', actual: false },
-  { disp: 'iPad · Safari', lugar: 'CDMX, México', cuando: 'Hace 1 día', actual: false },
+  { disp: 'Windows · Chrome', lugar: 'Madrid, España', cuando: 'Actividad ahora', actual: true },
+  { disp: 'iPhone · Safari', lugar: 'Madrid, España', cuando: 'Hace 2 horas', actual: false },
+  { disp: 'iPad · Safari', lugar: 'Madrid, España', cuando: 'Hace 1 día', actual: false },
 ]
 const DOSFA = [
   { Icon: Smartphone, titulo: 'Aplicación de autenticación', desc: 'Usa Google Authenticator o Authy', cta: 'Configurar' },

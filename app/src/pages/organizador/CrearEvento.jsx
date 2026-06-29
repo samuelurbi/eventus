@@ -257,7 +257,7 @@ function ConfigFacil({ plantilla, onBack, onDone }) {
                 <Field label="Invitados"><input type="number" className={inputCls} defaultValue={plantilla.invitados} /></Field>
               </div>
               <Field label="Ubicación"><input className={inputCls} placeholder="Ciudad o lugar del evento" /></Field>
-              <Field label="Presupuesto estimado (MXN)" hint="Lo ajustarás por categoría más adelante."><input type="number" className={inputCls} defaultValue={plantilla.presupuesto} /></Field>
+              <Field label="Presupuesto estimado (€)" hint="Lo ajustarás por categoría más adelante."><input type="number" className={inputCls} defaultValue={plantilla.presupuesto} /></Field>
             </div>
           </Card>
           <div className="rounded-lg border border-gray-200 bg-offwhite px-4 py-3 text-[12px] text-ink-muted">
@@ -427,7 +427,7 @@ function ModoAvanzado({ onBack, onDone }) {
 
             {paso === 4 && (
               <>
-                <Field label="Presupuesto total (MXN)"><input type="number" className={inputCls} value={f.presupuesto} onChange={(e) => set('presupuesto', e.target.value)} placeholder="Ej. 280000" /></Field>
+                <Field label="Presupuesto total (€)"><input type="number" className={inputCls} value={f.presupuesto} onChange={(e) => set('presupuesto', e.target.value)} placeholder="Ej. 18000" /></Field>
                 <Field label="Servicios que necesitas" hint="Selecciona todos los que apliquen.">
                   <div className="flex flex-wrap gap-2">
                     {f.servicios.filter((s) => !TODOS_SERVICIOS.includes(s)).map((s) => (
@@ -460,7 +460,7 @@ function ModoAvanzado({ onBack, onDone }) {
                         <div key={s} className="flex items-center gap-3">
                           <span className="flex min-w-0 flex-1 items-center gap-2 text-[12.5px] font-semibold text-ink-strong"><Icon size={14} strokeWidth={2.1} className="shrink-0 text-navy" /> {s}</span>
                           <div className="relative w-36">
-                            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[12px] text-ink-subtle">$</span>
+                            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[12px] text-ink-subtle">€</span>
                             <input type="number" value={f.montos[s] || ''} onChange={(e) => setMonto(s, e.target.value)} placeholder="0" className={cls(inputCls, 'h-9 pl-5 text-right')} />
                           </div>
                         </div>

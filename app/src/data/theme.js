@@ -1,7 +1,7 @@
 import { Heart, Briefcase, PartyPopper } from 'lucide-react'
 
-// Formato de moneda MXN
-export const FMT = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 })
+// Formato de moneda (euros — moneda única de la plataforma)
+export const FMT = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 
 // Imágenes Unsplash (id = parte "photo-<id>")
 export const UNSPLASH = (id, w = 800) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`
