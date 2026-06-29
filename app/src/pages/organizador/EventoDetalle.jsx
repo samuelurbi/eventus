@@ -4,12 +4,12 @@ import {
   ArrowLeft, Share2, ClipboardList, Users, CalendarClock, UserCheck,
   CheckCircle2, Clock, Plus, Search, Download, MoreVertical, Send, Paperclip,
   FileText, Image, Sheet, FileType2, MapPin, Wallet, BadgeCheck, PiggyBank, Phone,
-  Calendar, Mail, Eye, Check, ArrowRight, MailCheck,
+  Calendar, Mail, Eye, Check, ArrowRight, MailCheck, Heart, PartyPopper, Sparkles,
 } from 'lucide-react'
 import {
   EVENTOS, EV_PROV_CATEGORIAS, EV_PARTIDAS, EV_PAGOS, EV_INVITADOS, DOCUMENTOS, CONVERSACIONES, TAREAS, ACTIVIDAD, PROVEEDORES, ESTADO_MSG,
 } from '../../data/mock'
-import { FMT, diasRestantes } from '../../data/theme'
+import { FMT, UNSPLASH, diasRestantes } from '../../data/theme'
 import { Card, CardHeader, Badge, BtnPrimary, BtnOutline, Modal, cls } from '../../components/ui'
 import { ChatBubble } from '../../components/ChatBubble'
 import { usePageHeader } from '../../layouts/pageHeader'
@@ -298,27 +298,119 @@ const PLANTILLAS = [
   { id: 'festiva',   nombre: 'Festiva',   sub: 'Para fiestas',      grad: 'linear-gradient(135deg,#A78BFA 0%,#7C3AED 100%)', light: false },
 ]
 
-function InvitePreview({ evento, plantilla }) {
-  const t = PLANTILLAS.find((p) => p.id === plantilla) ?? PLANTILLAS[0]
-  const txt = t.light ? 'text-navy' : 'text-white'
-  const txtMuted = t.light ? 'text-navy/70' : 'text-white/85'
+function parseFecha(f) {
+  const [d, m, a] = (f || '14 sep 2026').split(' ')
+  return { d, m: (m || '').toUpperCase(), a }
+}
+function monograma(titulo) {
+  return titulo.split(/&| /).filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase()).join(' & ')
+}
+// Bloque de fecha estilo invitación: MES | día | año
+function FechaInvite({ d, m, a, color = 'text-navy', rule = 'border-navy/20' }) {
   return (
-    <div className="mx-auto max-w-sm overflow-hidden rounded-xl border border-gray-200 bg-white">
-      <div className="px-6 py-8 text-center" style={{ backgroundImage: t.grad }}>
-        <p className={cls('text-[11px] font-semibold uppercase tracking-[0.2em]', txtMuted)}>Estás invitado/a</p>
-        <p className={cls('mt-2 text-[20px] font-bold leading-tight', txt)}>{evento.nombre}</p>
-        <p className={cls('mt-1 text-[12px]', txtMuted)}>Nos encantaría contar con tu presencia</p>
-      </div>
-      <div className="px-6 py-6">
-        <div className="flex flex-col gap-2.5 text-[13px] text-ink-body">
-          <p className="flex items-center justify-center gap-2"><Calendar size={14} className="text-navy" /> {evento.fecha}</p>
-          <p className="flex items-center justify-center gap-2"><MapPin size={14} className="text-navy" /> {evento.lugar}</p>
-          <p className="flex items-center justify-center gap-2"><Clock size={14} className="text-navy" /> 7:00 PM</p>
+    <div className={cls('flex items-center justify-center gap-3', color)}>
+      <span className="text-[10px] font-semibold uppercase tracking-[0.2em]">{m}</span>
+      <span className={cls('border-x px-3 font-serif text-[26px] leading-none', rule)}>{d}</span>
+      <span className="text-[10px] font-semibold uppercase tracking-[0.2em]">{a}</span>
+    </div>
+  )
+}
+
+function InvitePreview({ evento, plantilla }) {
+  const { d, m, a } = parseFecha(evento.fecha)
+  const hora = '19:00 h'
+  const titulo = evento.nombre.replace(/^Boda\s+/i, '')
+  const [, ciudad] = (evento.lugar || '').split(',').map((s) => s.trim())
+  const venue = (evento.lugar || '').split(',')[0]
+
+  // ── Clásica: papel navy con marco dorado, serif, monograma ──
+  if (plantilla === 'clasica') {
+    const gold = '#C9A24B'
+    return (
+      <div className="mx-auto w-[300px] rounded-xl bg-[#0B334C] p-2">
+        <div className="flex flex-col items-center rounded-lg border px-6 py-7 text-center" style={{ borderColor: 'rgba(201,162,75,0.45)' }}>
+          <span className="flex h-12 w-12 items-center justify-center rounded-full border font-serif text-[15px] tracking-wide text-white" style={{ borderColor: gold, color: gold }}>{monograma(titulo)}</span>
+          <p className="mt-4 text-[9.5px] font-semibold uppercase tracking-[0.3em]" style={{ color: gold }}>Tienen el honor de invitarle</p>
+          <h3 className="mt-2 font-serif text-[23px] leading-tight text-white">{titulo}</h3>
+          <span className="my-4 flex items-center gap-2"><span className="h-px w-10" style={{ background: gold }} /><span className="h-1.5 w-1.5 rotate-45" style={{ background: gold }} /><span className="h-px w-10" style={{ background: gold }} /></span>
+          <FechaInvite d={d} m={m} a={a} color="text-white" rule="border-white/25" />
+          <p className="mt-3 text-[12px] text-white/85">{venue}</p>
+          <p className="text-[11px] text-white/55">{ciudad} · {hora}</p>
+          <button className="mt-5 w-full rounded-md border py-2 text-[12px] font-semibold" style={{ borderColor: gold, color: gold }}>Confirmar asistencia</button>
+          <p className="mt-3 text-[9px] uppercase tracking-[0.2em] text-white/35">Enviado con Eventus</p>
         </div>
-        <button className="mt-5 w-full rounded-lg bg-navy py-2.5 text-[13px] font-semibold text-white">Confirmar asistencia</button>
-        <p className="mt-3 text-center text-[11px] text-ink-subtle">Por favor confirma antes del 1 de septiembre</p>
       </div>
-      <div className="border-t border-gray-100 bg-offwhite px-6 py-3 text-center text-[10px] text-ink-subtle">Enviado con Eventus</div>
+    )
+  }
+
+  // ── Moderna: blanco minimalista, acento mint, tipografía grande ──
+  if (plantilla === 'moderna') {
+    return (
+      <div className="mx-auto w-[300px] overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="h-1.5 w-full bg-mint" />
+        <div className="px-6 py-7">
+          <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-ink-subtle">Save the date</p>
+          <h3 className="mt-3 text-[27px] font-extrabold leading-[1.05] tracking-tight text-navy">{evento.nombre}</h3>
+          <p className="mt-4 text-[34px] font-extrabold leading-none tracking-tight text-navy">{d}<span className="text-mint">.</span>{String(['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'].indexOf(m) + 1).padStart(2, '0')}<span className="text-mint">.</span>{a?.slice(2)}</p>
+          <div className="mt-5 flex flex-col gap-2 border-t border-gray-100 pt-4 text-[12.5px] text-ink-body">
+            <p className="flex items-center gap-2"><MapPin size={14} className="text-mint" /> {venue}, {ciudad}</p>
+            <p className="flex items-center gap-2"><Clock size={14} className="text-mint" /> {hora}</p>
+          </div>
+          <button className="mt-5 w-full rounded-lg bg-navy py-2.5 text-[13px] font-semibold text-white">Confirmar asistencia →</button>
+          <p className="mt-3 text-[9px] uppercase tracking-[0.2em] text-ink-subtle">Enviado con Eventus</p>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Festiva: foto de fiesta + confeti + violeta ──
+  if (plantilla === 'festiva') {
+    const confeti = ['#BCEE95', '#FB7BA8', '#FBBF24', '#60A5FA', '#A78BFA', '#34D399']
+    return (
+      <div className="mx-auto w-[300px] overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="relative h-32 overflow-hidden">
+          <img src={UNSPLASH('1530103862676-de8c9debad1d', 600)} alt="" className="h-full w-full object-cover" />
+          <span className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(135deg,rgba(124,58,237,0.85),rgba(167,139,250,0.7))' }} />
+          {confeti.map((c, i) => (
+            <span key={i} className="absolute h-2 w-1.5 rounded-[1px]" style={{ background: c, left: `${8 + i * 15}%`, top: `${15 + (i % 3) * 22}%`, transform: `rotate(${i * 40}deg)` }} />
+          ))}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
+            <PartyPopper size={26} strokeWidth={2} />
+            <p className="mt-1.5 text-[11px] font-bold uppercase tracking-[0.25em]">¡Estás invitado!</p>
+          </div>
+        </div>
+        <div className="px-6 py-5 text-center">
+          <h3 className="text-[21px] font-extrabold leading-tight text-violet-600">{evento.nombre}</h3>
+          <div className="mt-3 flex justify-center gap-2">
+            <span className="rounded-full bg-violet-50 px-3 py-1 text-[11px] font-bold text-violet-600">{d} {m}</span>
+            <span className="rounded-full bg-violet-50 px-3 py-1 text-[11px] font-bold text-violet-600">{hora}</span>
+          </div>
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-[12px] text-ink-muted"><MapPin size={13} className="text-violet-500" /> {venue}, {ciudad}</p>
+          <button className="mt-4 w-full rounded-lg bg-violet-600 py-2.5 text-[13px] font-semibold text-white">¡Allí estaré!</button>
+          <p className="mt-3 text-[9px] uppercase tracking-[0.2em] text-ink-subtle">Enviado con Eventus</p>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Romántica (default): foto de boda + papel crema + serif + corazón ──
+  return (
+    <div className="mx-auto w-[300px] overflow-hidden rounded-xl border border-rose-100 bg-[#FFF9F7]">
+      <div className="relative h-32">
+        <img src={UNSPLASH('1519741497674-611481863552', 600)} alt="" className="h-full w-full object-cover" />
+        <span className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(180deg,rgba(255,249,247,0) 35%,#FFF9F7)' }} />
+      </div>
+      <div className="relative -mt-7 px-6 pb-6 text-center">
+        <span className="mx-auto flex h-13 w-13 items-center justify-center rounded-full border border-rose-200 bg-white text-rose-500" style={{ height: 52, width: 52 }}><Heart size={20} fill="currentColor" /></span>
+        <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-rose-400">Nos casamos</p>
+        <h3 className="mt-1.5 font-serif text-[24px] leading-tight text-navy">{titulo}</h3>
+        <span className="my-4 flex items-center justify-center gap-2 text-rose-300"><span className="h-px w-10 bg-rose-200" /><Heart size={11} fill="currentColor" /><span className="h-px w-10 bg-rose-200" /></span>
+        <FechaInvite d={d} m={m} a={a} color="text-navy" rule="border-rose-200" />
+        <p className="mt-3 text-[12.5px] text-ink-body">{venue}</p>
+        <p className="text-[11px] text-ink-subtle">{ciudad} · {hora}</p>
+        <button className="mt-5 w-full rounded-lg py-2.5 text-[13px] font-semibold text-white" style={{ backgroundImage: 'linear-gradient(135deg,#FB7BA8,#E84B8A)' }}>Confirmar asistencia</button>
+        <p className="mt-3 text-[9px] uppercase tracking-[0.2em] text-ink-subtle">Enviado con Eventus</p>
+      </div>
     </div>
   )
 }
