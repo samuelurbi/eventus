@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 import { Search, SlidersHorizontal, ArrowUpDown, MapPin, Users, CalendarDays, Plus, X, Check } from 'lucide-react'
 import { Card, Badge, BtnPrimary, BtnOutline, Modal, cls } from '../../components/ui'
 import { SkeletonRow, useFakeLoad } from '../../components/Skeleton'
@@ -56,21 +56,24 @@ export default function Solicitudes() {
         <div className="divide-y divide-gray-100">
           {loading && [0, 1, 2, 3].map((i) => <SkeletonRow key={`sk${i}`} />)}
           {!loading && lista.map((s) => (
-            <div key={s.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-[12px] font-bold text-mint">{s.avatar}</span>
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-[14px] font-bold text-ink-strong">{s.evento}</p>
-                  <Badge tone={SOLICITUD_TONE[s.estado]}>{s.estado}</Badge>
+            <div key={s.id} className="flex flex-col gap-3 p-4 transition-colors hover:bg-gray-50 sm:flex-row sm:items-center">
+              <Link to={`/proveedor/solicitudes/${s.id}`} className="group flex min-w-0 flex-1 items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-[12px] font-bold text-mint">{s.avatar}</span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-[14px] font-bold text-ink-strong group-hover:text-navy">{s.evento}</p>
+                    <Badge tone={SOLICITUD_TONE[s.estado]}>{s.estado}</Badge>
+                  </div>
+                  <p className="text-[12px] text-ink-muted">{s.organizador} · {s.hace}</p>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px] text-ink-subtle">
+                    <span className="flex items-center gap-1"><CalendarDays size={12} /> {s.fecha}</span>
+                    <span className="flex items-center gap-1"><Users size={12} /> {s.personas} personas</span>
+                    <span className="flex items-center gap-1"><MapPin size={12} /> {s.ubicacion}</span>
+                  </div>
                 </div>
-                <p className="text-[12px] text-ink-muted">{s.organizador} · {s.hace}</p>
-                <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px] text-ink-subtle">
-                  <span className="flex items-center gap-1"><CalendarDays size={12} /> {s.fecha}</span>
-                  <span className="flex items-center gap-1"><Users size={12} /> {s.personas} personas</span>
-                  <span className="flex items-center gap-1"><MapPin size={12} /> {s.ubicacion}</span>
-                </div>
-              </div>
+              </Link>
               <div className="flex shrink-0 items-center gap-2">
+                <BtnOutline to={`/proveedor/solicitudes/${s.id}`}>Ver detalles</BtnOutline>
                 {s.estado === 'Respondida' ? (
                   <BtnOutline to="/proveedor/mensajes">Ver chat</BtnOutline>
                 ) : (

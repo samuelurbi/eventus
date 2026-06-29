@@ -122,7 +122,7 @@ export default function Dashboard() {
                 ) : (
                   <>
                     <BtnPrimary to={`/proveedor/solicitudes?id=${s.id}`}>Responder</BtnPrimary>
-                    <BtnOutline to={`/proveedor/solicitudes?id=${s.id}`}>Ver detalles</BtnOutline>
+                    <BtnOutline to={`/proveedor/solicitudes/${s.id}`}>Ver detalles</BtnOutline>
                   </>
                 )}
               </div>
