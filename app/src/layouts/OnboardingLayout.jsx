@@ -98,7 +98,7 @@ export default function OnboardingLayout({
         </div>
 
         <div className="flex flex-1 items-start justify-center overflow-y-auto px-6 py-10 sm:px-10 lg:py-14">
-          <div className="w-full max-w-[560px]">
+          <div className="t-rise w-full max-w-[560px]">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy-light">
               Paso {current + 1} de {total}
             </p>

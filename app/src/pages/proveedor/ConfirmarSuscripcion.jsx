@@ -29,7 +29,7 @@ export default function ConfirmarSuscripcion() {
       <div className="relative flex min-h-[78vh] items-center justify-center px-6 py-10">
         <Confetti />
         <div className="relative z-10 flex max-w-md flex-col items-center text-center">
-          <span className="mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-navy text-mint"><Crown size={36} strokeWidth={2} /></span>
+          <span className="t-pop mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-navy text-mint"><Crown size={36} strokeWidth={2} /></span>
           <h1 className="text-[24px] font-bold tracking-tight text-ink-strong">¡Bienvenido al plan {plan.nombre}!</h1>
           <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">Tu suscripción está activa. Ya disfrutas de mayor visibilidad, solicitudes ilimitadas y todas las ventajas {plan.nombre}.</p>
           <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">

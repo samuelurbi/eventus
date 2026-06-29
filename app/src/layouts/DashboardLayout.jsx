@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, CalendarDays, Users, Gift, LifeBuoy,
   MessageSquare, Settings, Search, LogOut, Plus, Menu,
@@ -67,6 +67,7 @@ function NavItem({ to, icon: Icon, label, badge, end }) {
 
 export default function DashboardLayout() {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [header, setHeader] = useState({ title: '', subtitle: '' })
   const [navOpen, setNavOpen] = useState(false)
 
@@ -181,7 +182,9 @@ export default function DashboardLayout() {
         {/* Page content */}
         <main className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden bg-offwhite">
           <PageHeaderContext.Provider value={setHeader}>
-            <Outlet />
+            <div key={pathname} className="t-rise h-full">
+              <Outlet />
+            </div>
           </PageHeaderContext.Provider>
         </main>
       </div>

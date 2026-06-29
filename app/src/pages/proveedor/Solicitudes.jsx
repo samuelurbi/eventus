@@ -129,7 +129,7 @@ function ResponderModal({ solicitud, onClose }) {
       )}
       {solicitud && enviado && (
         <div className="flex flex-col items-center gap-3 px-6 py-10 text-center">
-          <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-mint text-navy"><Check size={32} strokeWidth={2.4} /></span>
+          <span className="t-pop flex h-16 w-16 items-center justify-center rounded-2xl bg-mint text-navy"><Check size={32} strokeWidth={2.4} /></span>
           <h3 className="text-[18px] font-bold text-ink-strong">¡Presupuesto enviado!</h3>
           <p className="max-w-sm text-[13px] leading-relaxed text-ink-muted">Tu propuesta de <strong className="text-ink-strong">{EUR.format(total)}</strong> para <strong className="text-ink-strong">{solicitud.evento}</strong> ya está en la bandeja de {solicitud.organizador}.</p>
           <div className="mt-2 flex gap-2"><BtnPrimary to="/proveedor/mensajes">Ir a mensajes</BtnPrimary><BtnOutline onClick={close}>Cerrar</BtnOutline></div>

@@ -47,7 +47,7 @@ export default function AuthLayout({
 
       {/* Panel de formulario — 50% */}
       <main className="flex w-full items-center justify-center bg-offwhite px-6 py-12 lg:w-1/2">
-        <div className="w-full max-w-[380px]">
+        <div className="t-rise w-full max-w-[380px]">
           <div className="mb-8 lg:hidden">
             <Logo size={28} className="text-navy" />
           </div>

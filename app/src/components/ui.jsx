@@ -1,15 +1,33 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { X } from 'lucide-react'
 
 export const cls = (...a) => a.filter(Boolean).join(' ')
 
 // Modal centrado con backdrop (sin sombra: separación por backdrop + borde)
+// Anima entrada/salida con .t-modal (scale-up al abrir, scale-down al cerrar).
 export function Modal({ open, onClose, title, children, footer, wide }) {
-  if (!open) return null
+  const [render, setRender] = useState(open)
+  const [state, setState] = useState(open ? 'open' : 'closed') // 'open' | 'closing' | 'closed'
+
+  useEffect(() => {
+    if (open) {
+      setRender(true)
+      const r = requestAnimationFrame(() => requestAnimationFrame(() => setState('open')))
+      return () => cancelAnimationFrame(r)
+    }
+    if (render) {
+      setState('closing')
+      const t = setTimeout(() => { setState('closed'); setRender(false) }, 160)
+      return () => clearTimeout(t)
+    }
+  }, [open]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!render) return null
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-navy/40 backdrop-blur-[2px]" onClick={onClose} />
-      <div className={cls('relative z-10 flex max-h-[90vh] w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white', wide ? 'max-w-4xl' : 'max-w-lg')}>
+      <div className={cls('absolute inset-0 bg-navy/40 backdrop-blur-[2px] transition-opacity duration-200', state === 'open' ? 'opacity-100' : 'opacity-0')} onClick={onClose} />
+      <div className={cls('t-modal relative z-10 flex max-h-[90vh] w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white', wide ? 'max-w-4xl' : 'max-w-lg', state === 'open' && 'is-open', state === 'closing' && 'is-closing')}>
         <div className="flex items-center justify-between border-b border-gray-200 px-5 py-3.5">
           <h3 className="text-[15px] font-bold text-ink-strong">{title}</h3>
           <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-muted transition-colors hover:bg-gray-100"><X size={18} /></button>

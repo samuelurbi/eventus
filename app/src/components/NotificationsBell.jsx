@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Bell, MessageSquare, FileText, Inbox, Wallet, CheckCircle2, CalendarDays, CheckCheck,
 } from 'lucide-react'
@@ -33,7 +33,15 @@ export const NOTIF_PROV = [
 
 export function NotificationsBell({ items = NOTIF_ORG }) {
   const [open, setOpen] = useState(false)
+  const [shown, setShown] = useState(false)
   const [notifs, setNotifs] = useState(items)
+
+  useEffect(() => {
+    if (!open) { setShown(false); return }
+    const r = requestAnimationFrame(() => setShown(true))
+    return () => cancelAnimationFrame(r)
+  }, [open])
+
   const noLeidas = notifs.filter((n) => !n.leida).length
   const marcarTodas = () => setNotifs((p) => p.map((n) => ({ ...n, leida: true })))
   const marcarUna = (id) => setNotifs((p) => p.map((n) => (n.id === id ? { ...n, leida: true } : n)))
@@ -50,7 +58,7 @@ export function NotificationsBell({ items = NOTIF_ORG }) {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 z-50 mt-2 flex max-h-[70vh] w-[340px] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white">
+          <div data-origin="top-right" className={cls('t-dropdown absolute right-0 z-50 mt-2 flex max-h-[70vh] w-[340px] max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white', shown && 'is-open')}>
             <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
               <div className="flex items-center gap-2">
                 <h3 className="text-[14px] font-bold text-ink-strong">Notificaciones</h3>
