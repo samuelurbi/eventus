@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Inbox, FileText, MessageSquare, Store, History, Crown,
-  Bell, Search, LogOut, Menu,
+  Search, LogOut, Menu,
 } from 'lucide-react'
 import Logo from '../components/Logo'
 import { cls } from '../components/ui'
+import { NotificationsBell, NOTIF_PROV } from '../components/NotificationsBell'
 import { PageHeaderContext } from './pageHeader'
 import { PROVEEDOR, PROV_KPIS } from '../data/proveedorMock'
 
@@ -110,10 +111,7 @@ export default function ProviderLayout() {
               <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
               <input placeholder="Buscar…" className="h-8 w-full rounded-lg border border-gray-200 bg-gray-100 pl-8 pr-3 text-[13px] text-ink-body placeholder:text-ink-subtle focus:border-navy-light focus:outline-none focus:ring-1 focus:ring-mint/40" />
             </div>
-            <button className="relative flex h-8 w-8 items-center justify-center rounded-lg text-ink-muted transition-colors hover:bg-gray-100">
-              <Bell size={16} strokeWidth={1.8} />
-              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-mint" />
-            </button>
+            <NotificationsBell items={NOTIF_PROV} />
             <div className="hidden h-7 w-7 items-center justify-center rounded-full bg-mint text-[11px] font-bold text-navy sm:flex">{PROVEEDOR.iniciales}</div>
           </div>
         </header>

@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, CalendarDays, Users, Gift, LifeBuoy,
-  MessageSquare, Settings, Bell, Search, LogOut, Plus, Menu, X,
+  MessageSquare, Settings, Search, LogOut, Plus, Menu,
 } from 'lucide-react'
 import Logo from '../components/Logo'
 import { cls } from '../components/ui'
+import { NotificationsBell, NOTIF_ORG } from '../components/NotificationsBell'
 import { PageHeaderContext } from './pageHeader'
 
 const NAV_GROUPS = [
@@ -161,10 +162,7 @@ export default function DashboardLayout() {
               </kbd>
             </div>
 
-            <button className="relative flex h-8 w-8 items-center justify-center rounded-lg text-ink-muted hover:bg-gray-100 transition-colors">
-              <Bell size={16} strokeWidth={1.8} />
-              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-mint" />
-            </button>
+            <NotificationsBell items={NOTIF_ORG} />
 
             <div className="hidden h-7 w-7 items-center justify-center rounded-full bg-navy text-[11px] font-bold text-white sm:flex">
               SU
