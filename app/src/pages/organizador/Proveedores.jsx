@@ -30,7 +30,7 @@ function Stars({ rating }) {
 function ProveedorCard({ p }) {
   const c = catFor(p.categoria)
   return (
-    <Link to={`/organizador/proveedores/${p.id}`} className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-colors hover:border-navy/40">
+    <Link to={`/organizador/proveedores/${p.id}`} className="t-lift group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white hover:border-navy/40">
       {/* Imagen (placeholder por categoría) */}
       <div className="relative h-32 overflow-hidden" style={{ backgroundImage: c.grad }}>
         <c.Icon size={64} strokeWidth={1.4} className="absolute -bottom-3 -right-2 text-white/20" />

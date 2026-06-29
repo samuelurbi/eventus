@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Inbox, MessageSquare, FileText, Trophy, Target, TrendingUp, Star, CheckCircle2, MapPin, Users, CalendarDays, ArrowRight } from 'lucide-react'
 import { Card, CardHeader, Badge, BtnPrimary, BtnOutline, Progress, cls } from '../../components/ui'
+import { CountUp } from '../../components/CountUp'
 import { usePageHeader } from '../../layouts/pageHeader'
 import { PROV_KPIS, PROV_NIVEL, PROV_METAS, PROV_STATS, SOLICITUDES, SOLICITUD_TONE } from '../../data/proveedorMock'
 
@@ -25,14 +26,14 @@ export default function Dashboard() {
   return (
     <div className="px-4 py-5 sm:px-7">
       {/* KPIs */}
-      <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="t-stagger-grid mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {KPIS.map((k) => (
-          <Card key={k.label} className="p-5">
+          <Card key={k.label} className="t-lift p-5">
             <div className="mb-3 flex items-start justify-between">
               <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy/8 text-navy"><k.Icon size={19} strokeWidth={2} /></span>
               {k.tag && <span className="text-[11px] font-semibold text-ink-subtle">{k.tag}</span>}
             </div>
-            <p className="text-[30px] font-bold leading-none text-ink-strong">{k.value}</p>
+            <p className="text-[30px] font-bold leading-none text-ink-strong"><CountUp to={k.value} /></p>
             <p className="mt-1.5 text-[12.5px] text-ink-muted">{k.label}</p>
             <BtnPrimary to={k.to} className="mt-4 w-full">{k.cta}</BtnPrimary>
           </Card>
@@ -86,9 +87,9 @@ export default function Dashboard() {
       </div>
 
       {/* Stats rápidas */}
-      <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="t-stagger-grid mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {PROV_STATS.map((s, i) => (
-          <Card key={s.label} className="p-5">
+          <Card key={s.label} className="t-lift p-5">
             <div className="mb-2 flex items-center justify-between">
               <p className="text-[12px] text-ink-muted">{s.label}</p>
               {[<TrendingUp key="t" size={15} className="text-ink-subtle" />, <TrendingUp key="c" size={15} className="text-ink-subtle" />, <Star key="s" size={15} className="text-amber-400" fill="currentColor" />][i]}

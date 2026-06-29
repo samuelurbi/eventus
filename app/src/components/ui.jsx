@@ -89,23 +89,28 @@ export function Badge({ children, tone = 'gray', className = '' }) {
 
 // Botón primario (mint) — Link si hay `to`, button si hay `onClick`
 export function BtnPrimary({ children, to, onClick, type, className = '' }) {
-  const cn = cls('inline-flex items-center justify-center gap-1.5 rounded-lg bg-mint px-3.5 py-2 text-[13px] font-semibold text-navy transition-colors hover:bg-[#aee584]', className)
+  const cn = cls('inline-flex items-center justify-center gap-1.5 rounded-lg bg-mint px-3.5 py-2 text-[13px] font-semibold text-navy transition duration-150 hover:bg-[#aee584] active:scale-[0.97] motion-reduce:active:scale-100', className)
   if (to) return <Link to={to} className={cn}>{children}</Link>
   return <button type={type || 'button'} onClick={onClick} className={cn}>{children}</button>
 }
 
 // Botón secundario (contorno)
 export function BtnOutline({ children, to, onClick, className = '' }) {
-  const cn = cls('inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3.5 py-2 text-[13px] font-semibold text-ink-strong transition-colors hover:border-navy/40', className)
+  const cn = cls('inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3.5 py-2 text-[13px] font-semibold text-ink-strong transition duration-150 hover:border-navy/40 active:scale-[0.97] motion-reduce:active:scale-100', className)
   if (to) return <Link to={to} className={cn}>{children}</Link>
   return <button type="button" onClick={onClick} className={cn}>{children}</button>
 }
 
-// Barra de progreso
+// Barra de progreso — crece de 0 → pct al montar
 export function Progress({ pct, grad, className = '' }) {
+  const [w, setW] = useState(0)
+  useEffect(() => {
+    const r = requestAnimationFrame(() => setW(pct))
+    return () => cancelAnimationFrame(r)
+  }, [pct])
   return (
     <div className={cls('h-2 overflow-hidden rounded-full bg-gray-100', className)}>
-      <div className="h-full rounded-full bg-navy" style={{ width: `${pct}%`, backgroundImage: grad }} />
+      <div className="h-full rounded-full bg-navy transition-[width] duration-700 ease-out motion-reduce:transition-none" style={{ width: `${w}%`, backgroundImage: grad }} />
     </div>
   )
 }

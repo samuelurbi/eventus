@@ -87,7 +87,7 @@ function SeleccionModo({ onPick }) {
         </div>
         <div className="flex flex-col gap-4">
           {MODOS.map((m) => (
-            <button key={m.id} onClick={() => onPick(m.id)} className="group flex overflow-hidden rounded-xl border border-gray-200 bg-white text-left transition-colors hover:border-navy">
+            <button key={m.id} onClick={() => onPick(m.id)} className="t-lift group flex overflow-hidden rounded-xl border border-gray-200 bg-white text-left hover:border-navy">
               {/* Panel de color */}
               <div className="flex w-[168px] shrink-0 flex-col justify-between p-5" style={{ backgroundImage: m.panelGrad }}>
                 <span className={cls('flex h-12 w-12 items-center justify-center rounded-xl', m.iconWrap)}><m.Icon size={24} strokeWidth={2} /></span>
@@ -168,7 +168,7 @@ function ElegirPlantilla({ onBack, onPick }) {
             const visibles = p.servicios.slice(0, 3)
             const resto = p.servicios.length - visibles.length
             return (
-              <div key={p.id} className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-colors hover:border-navy/50">
+              <div key={p.id} className="t-lift group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white hover:border-navy/50">
                 <button onClick={() => onPick(p)} className="relative block h-32 w-full overflow-hidden text-left">
                   <img src={UNSPLASH(p.img, 600)} alt={p.nombre} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                   <span className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(180deg,transparent 38%,rgba(11,51,76,.62))' }} />

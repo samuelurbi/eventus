@@ -14,7 +14,7 @@ function EventCard({ e }) {
   const dias = diasRestantes(e.fecha)
   const pct = Math.round((e.gastado / e.presupuesto) * 100)
   return (
-    <Link to={`/organizador/eventos/${e.id}`} className="group flex flex-col rounded-lg border border-gray-200 bg-white p-1.5 transition-colors hover:border-navy/40">
+    <Link to={`/organizador/eventos/${e.id}`} className="t-lift group flex flex-col rounded-lg border border-gray-200 bg-white p-1.5 hover:border-navy/40">
       {/* Portada */}
       <div className="relative h-36 overflow-hidden rounded-lg px-4 pt-3" style={{ backgroundImage: t.grad }}>
         <img src={UNSPLASH(t.img, 700)} alt={e.tipo} onError={(ev) => { ev.currentTarget.style.display = 'none' }} className="absolute inset-0 h-full w-full object-cover" />

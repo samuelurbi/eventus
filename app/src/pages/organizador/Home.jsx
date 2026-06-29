@@ -6,6 +6,7 @@ import {
   Plus, Search, Upload,
 } from 'lucide-react'
 import { EVENTOS, MENSAJES, TAREAS, ACTIVIDAD, SPARKLINES } from '../../data/mock'
+import { CountUp } from '../../components/CountUp'
 import { usePageHeader } from '../../layouts/pageHeader'
 
 const FMT = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
@@ -113,7 +114,7 @@ function MiniStat({ icon, label, value, trend, trendUp = true, sparkKey, to }) {
   return (
     <Link
       to={to}
-      className="group relative flex min-h-[124px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white hover:border-navy/40 transition-colors"
+      className="t-lift group relative flex min-h-[124px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white hover:border-navy/40"
     >
       <div className="flex items-start justify-between p-4 pb-0">
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-offwhite text-navy">{icon}</span>
@@ -318,11 +319,11 @@ export default function Home() {
       {/* Zona superior: evento destacado + KPIs */}
       <div className="mb-5 grid grid-cols-1 gap-5 xl:grid-cols-[1fr_minmax(360px,38%)]">
         <FeaturedEvent evento={proximo} />
-        <div className="grid grid-cols-2 grid-rows-2 gap-4">
-          <MiniStat icon={<CalendarDays size={17} strokeWidth={1.8} />} label="Eventos activos" value="3" trend="+1" trendUp sparkKey="eventos" to="/organizador/eventos" />
-          <MiniStat icon={<Users size={17} strokeWidth={1.8} />} label="Proveedores" value="16" trend="+2" trendUp sparkKey="proveedores" to="/organizador/proveedores" />
-          <MiniStat icon={<Wallet size={17} strokeWidth={1.8} />} label="Presupuesto" value="358 K€" trend="32%" trendUp sparkKey="presupuesto" to="/organizador/presupuesto" />
-          <MiniStat icon={<MessageSquare size={17} strokeWidth={1.8} />} label="Sin leer" value={`${noLeidos}`} trend="2 urgentes" trendUp={false} sparkKey="mensajes" to="/organizador/mensajes" />
+        <div className="t-stagger-grid grid grid-cols-2 grid-rows-2 gap-4">
+          <MiniStat icon={<CalendarDays size={17} strokeWidth={1.8} />} label="Eventos activos" value={<CountUp to={3} />} trend="+1" trendUp sparkKey="eventos" to="/organizador/eventos" />
+          <MiniStat icon={<Users size={17} strokeWidth={1.8} />} label="Proveedores" value={<CountUp to={16} />} trend="+2" trendUp sparkKey="proveedores" to="/organizador/proveedores" />
+          <MiniStat icon={<Wallet size={17} strokeWidth={1.8} />} label="Presupuesto" value={<CountUp to={358} suffix=" K€" />} trend="32%" trendUp sparkKey="presupuesto" to="/organizador/presupuesto" />
+          <MiniStat icon={<MessageSquare size={17} strokeWidth={1.8} />} label="Sin leer" value={<CountUp to={noLeidos} />} trend="2 urgentes" trendUp={false} sparkKey="mensajes" to="/organizador/mensajes" />
         </div>
       </div>
 

@@ -48,7 +48,7 @@ const RECURSOS = [
 
 function CategoriaCard({ c, activa, count, onClick }) {
   return (
-    <button onClick={onClick} className={cls('flex items-start gap-3 rounded-xl border p-4 text-left transition-colors', activa ? 'border-navy bg-navy/[0.03]' : 'border-gray-200 bg-white hover:border-navy/40')}>
+    <button onClick={onClick} className={cls('t-lift flex items-start gap-3 rounded-xl border p-4 text-left', activa ? 'border-navy bg-navy/[0.03]' : 'border-gray-200 bg-white hover:border-navy/40')}>
       <span className={cls('flex h-10 w-10 shrink-0 items-center justify-center rounded-lg', activa ? 'bg-navy text-mint' : 'bg-navy/8 text-navy')}><c.Icon size={19} strokeWidth={2} /></span>
       <span className="min-w-0">
         <span className="flex items-center gap-2 text-[13.5px] font-bold text-ink-strong">{c.label}<Badge tone="gray">{count}</Badge></span>
