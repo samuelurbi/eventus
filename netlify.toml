@@ -1,0 +1,16 @@
+# Configuración de despliegue en Netlify
+# La app vive en app/ (Vite + React). Netlify ejecuta el build ahí y publica app/dist.
+
+[build]
+  base = "app"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA: react-router usa BrowserRouter, así que toda ruta debe servir index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
