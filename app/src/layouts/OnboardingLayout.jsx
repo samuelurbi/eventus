@@ -25,9 +25,10 @@ export default function OnboardingLayout({
   nextLabel = 'Continuar',
   canContinue = true,
   onNext,
+  steps = ONBOARDING_STEPS,
 }) {
   const navigate = useNavigate()
-  const total = ONBOARDING_STEPS.length
+  const total = steps.length
 
   function handleNext() {
     if (!canContinue) return
@@ -54,7 +55,7 @@ export default function OnboardingLayout({
             </h2>
 
             <ol className="mt-9 space-y-1">
-              {ONBOARDING_STEPS.map((step, i) => {
+              {steps.map((step, i) => {
                 const done = i < current
                 const active = i === current
                 return (

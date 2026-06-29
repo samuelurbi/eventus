@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Search, SlidersHorizontal, ArrowUpDown, MapPin, Users, CalendarDays, Plus, X, Check } from 'lucide-react'
 import { Card, Badge, BtnPrimary, BtnOutline, Modal, cls } from '../../components/ui'
+import { SkeletonRow, useFakeLoad } from '../../components/Skeleton'
 import { usePageHeader } from '../../layouts/pageHeader'
 import { SOLICITUDES, SOLICITUD_TONE, EUR } from '../../data/proveedorMock'
 
@@ -13,6 +14,7 @@ export default function Solicitudes() {
   const [sp, setSp] = useSearchParams()
   const [q, setQ] = useState('')
   const [chip, setChip] = useState('Todas')
+  const loading = useFakeLoad()
   const abierta = sp.get('id') ? SOLICITUDES.find((s) => String(s.id) === sp.get('id')) : null
   usePageHeader('Gestiona tus Oportunidades', 'Revisa y responde solicitudes de organizadores')
 
@@ -52,7 +54,8 @@ export default function Solicitudes() {
           <span className="text-[12px] text-ink-muted">{lista.length} de {SOLICITUDES.length}</span>
         </div>
         <div className="divide-y divide-gray-100">
-          {lista.map((s) => (
+          {loading && [0, 1, 2, 3].map((i) => <SkeletonRow key={`sk${i}`} />)}
+          {!loading && lista.map((s) => (
             <div key={s.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-[12px] font-bold text-mint">{s.avatar}</span>
               <div className="min-w-0 flex-1">

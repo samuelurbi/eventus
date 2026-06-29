@@ -1,11 +1,12 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import {
   ArrowLeft, Star, MapPin, BadgeCheck, Heart, Mail, Phone, Check,
-  Clock, CalendarCheck, Users, Globe, Image as ImageIcon,
+  Clock, CalendarCheck, Users, Globe, Image as ImageIcon, PenLine,
 } from 'lucide-react'
 import { PROVEEDORES, PROVEEDOR_SERVICIOS, PROVEEDOR_PAQUETES, PROVEEDOR_RESENAS } from '../../data/mock'
 import { FMT } from '../../data/theme'
-import { Card, CardHeader, Badge, BtnPrimary, BtnOutline, cls } from '../../components/ui'
+import { Card, CardHeader, Badge, BtnPrimary, BtnOutline, Modal, cls } from '../../components/ui'
 import { usePageHeader } from '../../layouts/pageHeader'
 import { catFor } from './Proveedores'
 
@@ -33,6 +34,7 @@ export default function ProveedorDetalle() {
   const { id } = useParams()
   const p = PROVEEDORES.find((x) => String(x.id) === id) ?? PROVEEDORES[0]
   const c = catFor(p.categoria)
+  const [review, setReview] = useState(false)
   usePageHeader(p.nombre, `${p.categoria} · ${p.ubicacion}`)
 
   return (
@@ -142,8 +144,9 @@ export default function ProveedorDetalle() {
                 </div>
               ))}
             </div>
-            <div className="border-t border-gray-100 p-3">
-              <button className="w-full rounded-lg border border-gray-200 py-2 text-[12.5px] font-semibold text-ink-strong transition-colors hover:border-navy/40">Ver todas las valoraciones</button>
+            <div className="flex gap-2 border-t border-gray-100 p-3">
+              <button className="flex-1 rounded-lg border border-gray-200 py-2 text-[12.5px] font-semibold text-ink-strong transition-colors hover:border-navy/40">Ver todas</button>
+              <BtnPrimary onClick={() => setReview(true)} className="flex-1"><PenLine size={14} /> Dejar reseña</BtnPrimary>
             </div>
           </Card>
         </div>
@@ -181,6 +184,51 @@ export default function ProveedorDetalle() {
             </div>
           </Card>
         </div>
+      </div>
+
+      <Modal open={review} onClose={() => setReview(false)} title={`Valorar a ${p.nombre}`}>
+        <ReviewForm proveedor={p} onClose={() => setReview(false)} />
+      </Modal>
+    </div>
+  )
+}
+
+function ReviewForm({ proveedor, onClose }) {
+  const [rating, setRating] = useState(5)
+  const [hover, setHover] = useState(0)
+  const [done, setDone] = useState(false)
+  if (done) {
+    return (
+      <div className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+        <span className="t-pop flex h-16 w-16 items-center justify-center rounded-2xl bg-mint text-navy"><Check size={32} strokeWidth={2.4} /></span>
+        <h3 className="text-[17px] font-bold text-ink-strong">¡Gracias por tu reseña!</h3>
+        <p className="max-w-sm text-[13px] text-ink-muted">Tu valoración de {rating} estrella{rating !== 1 ? 's' : ''} ayuda a otros organizadores a elegir mejor.</p>
+        <BtnPrimary onClick={onClose} className="mt-1">Listo</BtnPrimary>
+      </div>
+    )
+  }
+  return (
+    <div className="flex flex-col gap-4 p-5">
+      <div className="flex items-center gap-3 rounded-lg bg-offwhite p-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-[12px] font-bold text-mint">{proveedor.avatar}</span>
+        <div><p className="text-[13px] font-semibold text-ink-strong">{proveedor.nombre}</p><p className="text-[11.5px] text-ink-muted">{proveedor.categoria}</p></div>
+      </div>
+      <div className="text-center">
+        <p className="mb-2 text-[12px] font-semibold text-ink-strong">¿Cómo fue tu experiencia?</p>
+        <div className="flex justify-center gap-1.5">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button key={n} onMouseEnter={() => setHover(n)} onMouseLeave={() => setHover(0)} onClick={() => setRating(n)} className="transition-transform hover:scale-110 active:scale-95">
+              <Star size={32} className={cls((hover || rating) >= n ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200')} />
+            </button>
+          ))}
+        </div>
+      </div>
+      <label className="block"><span className="mb-1.5 block text-[12px] font-semibold text-ink-strong">Tu comentario</span>
+        <textarea rows={4} className={cls(inputCls, 'h-auto resize-none py-2.5')} placeholder="Cuéntanos qué tal estuvo el servicio, la puntualidad, la calidad…" />
+      </label>
+      <div className="flex justify-end gap-2 border-t border-gray-100 pt-4">
+        <BtnOutline onClick={onClose}>Cancelar</BtnOutline>
+        <BtnPrimary onClick={() => setDone(true)}>Publicar reseña</BtnPrimary>
       </div>
     </div>
   )

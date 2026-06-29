@@ -2,13 +2,27 @@ import { useState } from 'react'
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, Inbox, FileText, MessageSquare, Store, History, Crown,
-  Search, LogOut, Menu,
+  LogOut, Menu, Settings, LifeBuoy,
 } from 'lucide-react'
 import Logo from '../components/Logo'
 import { cls } from '../components/ui'
 import { NotificationsBell, NOTIF_PROV } from '../components/NotificationsBell'
+import { GlobalSearch } from '../components/GlobalSearch'
 import { PageHeaderContext } from './pageHeader'
-import { PROVEEDOR, PROV_KPIS } from '../data/proveedorMock'
+import { PROVEEDOR, PROV_KPIS, SOLICITUDES } from '../data/proveedorMock'
+
+const SEARCH_ITEMS = [
+  ...SOLICITUDES.map((s) => ({ group: 'Solicitudes', label: s.evento, sub: `${s.organizador} · ${s.ubicacion}`, to: `/proveedor/solicitudes/${s.id}`, Icon: Inbox })),
+  { group: 'Secciones', label: 'Dashboard', to: '/proveedor', Icon: LayoutDashboard },
+  { group: 'Secciones', label: 'Solicitudes', to: '/proveedor/solicitudes', Icon: Inbox },
+  { group: 'Secciones', label: 'Presupuestos', to: '/proveedor/presupuestos', Icon: FileText },
+  { group: 'Secciones', label: 'Mensajes', to: '/proveedor/mensajes', Icon: MessageSquare },
+  { group: 'Secciones', label: 'Mi Perfil', to: '/proveedor/perfil', Icon: Store },
+  { group: 'Secciones', label: 'Historial', to: '/proveedor/historial', Icon: History },
+  { group: 'Secciones', label: 'Suscripción', to: '/proveedor/suscripcion', Icon: Crown },
+  { group: 'Secciones', label: 'Configuración', to: '/proveedor/configuracion', Icon: Settings },
+  { group: 'Secciones', label: 'Ayuda', to: '/proveedor/ayuda', Icon: LifeBuoy },
+]
 
 const NAV_GROUPS = [
   {
@@ -84,6 +98,12 @@ export default function ProviderLayout() {
           ))}
         </nav>
 
+        {/* Utilidades de cuenta */}
+        <nav className="px-2 py-2">
+          <NavItem to="/proveedor/configuracion" icon={Settings} label="Configuración" />
+          <NavItem to="/proveedor/ayuda" icon={LifeBuoy} label="Ayuda" />
+        </nav>
+
         {/* Chip de proveedor */}
         <div className="border-t border-white/[0.06] p-2">
           <div className="flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2.5 transition-colors hover:bg-white/6">
@@ -108,11 +128,8 @@ export default function ProviderLayout() {
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <div className="relative hidden w-52 sm:block">
-              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
-              <input placeholder="Buscar…" className="h-8 w-full rounded-lg border border-gray-200 bg-gray-100 pl-8 pr-3 text-[13px] text-ink-body placeholder:text-ink-subtle focus:border-navy-light focus:outline-none focus:ring-1 focus:ring-mint/40" />
-            </div>
-            <NotificationsBell items={NOTIF_PROV} />
+            <div className="hidden w-56 sm:block"><GlobalSearch items={SEARCH_ITEMS} placeholder="Buscar solicitudes…" /></div>
+            <NotificationsBell items={NOTIF_PROV} verTodasTo="/proveedor/notificaciones" />
             <div className="hidden h-7 w-7 items-center justify-center rounded-full bg-mint text-[11px] font-bold text-navy sm:flex">{PROVEEDOR.iniciales}</div>
           </div>
         </header>

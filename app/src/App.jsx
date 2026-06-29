@@ -15,20 +15,29 @@ import Ubicacion from './pages/onboarding/Ubicacion'
 import Presupuesto from './pages/onboarding/Presupuesto'
 import Servicios from './pages/onboarding/Servicios'
 import Listo from './pages/onboarding/Listo'
+import { ProvCategoria, ProvServicios, ProvCobertura, ProvDocumentos, ProvListo } from './pages/onboarding/Proveedor'
 
 // Layouts
 import DashboardLayout from './layouts/DashboardLayout'
 import ProviderLayout from './layouts/ProviderLayout'
 
+// Compartido
+import Notificaciones from './pages/Notificaciones'
+import Rsvp from './pages/Rsvp'
+import { NOTIF_ORG, NOTIF_PROV } from './components/NotificationsBell'
+
 // Proveedor
 import ProvDashboard from './pages/proveedor/Dashboard'
 import ProvSolicitudes from './pages/proveedor/Solicitudes'
+import ProvSolicitudDetalle from './pages/proveedor/SolicitudDetalle'
 import ProvPresupuestos from './pages/proveedor/Presupuestos'
 import ProvMensajes from './pages/proveedor/Mensajes'
 import ProvMiPerfil from './pages/proveedor/MiPerfil'
 import ProvHistorial from './pages/proveedor/Historial'
 import ProvSuscripcion from './pages/proveedor/Suscripcion'
 import ProvConfirmar from './pages/proveedor/ConfirmarSuscripcion'
+import ProvConfiguracion from './pages/proveedor/Configuracion'
+import ProvAyuda from './pages/proveedor/Ayuda'
 
 // Organizador
 import Home from './pages/organizador/Home'
@@ -43,9 +52,12 @@ import Mensajes from './pages/organizador/Mensajes'
 import Configuracion from './pages/organizador/Configuracion'
 import Referidos from './pages/organizador/Referidos'
 import Ayuda from './pages/organizador/Ayuda'
+import Calendario from './pages/organizador/Calendario'
+import Pagos from './pages/organizador/Pagos'
 
 // Dev
 import DevNav from './components/DevNav'
+import NotFound from './pages/NotFound'
 
 function Stub({ name }) {
   return (
@@ -79,6 +91,17 @@ export default function App() {
         <Route path="/onboarding/servicios" element={<Servicios />} />
         <Route path="/onboarding/listo" element={<Listo />} />
 
+        {/* Onboarding Proveedor */}
+        <Route path="/onboarding-proveedor" element={<Navigate to="/onboarding-proveedor/categoria" replace />} />
+        <Route path="/onboarding-proveedor/categoria" element={<ProvCategoria />} />
+        <Route path="/onboarding-proveedor/servicios" element={<ProvServicios />} />
+        <Route path="/onboarding-proveedor/cobertura" element={<ProvCobertura />} />
+        <Route path="/onboarding-proveedor/documentos" element={<ProvDocumentos />} />
+        <Route path="/onboarding-proveedor/listo" element={<ProvListo />} />
+
+        {/* RSVP público del invitado */}
+        <Route path="/rsvp/:id" element={<Rsvp />} />
+
         {/* Dashboard Organizador */}
         <Route path="/organizador" element={<DashboardLayout />}>
           <Route index element={<Home />} />
@@ -91,6 +114,9 @@ export default function App() {
           <Route path="documentos" element={<Documentos />} />
           <Route path="mensajes" element={<Mensajes />} />
           <Route path="referidos" element={<Referidos />} />
+          <Route path="calendario" element={<Calendario />} />
+          <Route path="pagos" element={<Pagos />} />
+          <Route path="notificaciones" element={<Notificaciones items={NOTIF_ORG} />} />
           <Route path="configuracion" element={<Configuracion />} />
           <Route path="ayuda" element={<Ayuda />} />
         </Route>
@@ -99,15 +125,19 @@ export default function App() {
         <Route path="/proveedor" element={<ProviderLayout />}>
           <Route index element={<ProvDashboard />} />
           <Route path="solicitudes" element={<ProvSolicitudes />} />
+          <Route path="solicitudes/:id" element={<ProvSolicitudDetalle />} />
           <Route path="presupuestos" element={<ProvPresupuestos />} />
           <Route path="mensajes" element={<ProvMensajes />} />
           <Route path="perfil" element={<ProvMiPerfil />} />
           <Route path="historial" element={<ProvHistorial />} />
           <Route path="suscripcion" element={<ProvSuscripcion />} />
           <Route path="suscripcion/confirmar" element={<ProvConfirmar />} />
+          <Route path="notificaciones" element={<Notificaciones items={NOTIF_PROV} />} />
+          <Route path="configuracion" element={<ProvConfiguracion />} />
+          <Route path="ayuda" element={<ProvAyuda />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {/* Panel de dev — siempre visible */}

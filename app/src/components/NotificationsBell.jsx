@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Bell, MessageSquare, FileText, Inbox, Wallet, CheckCircle2, CalendarDays, CheckCheck,
 } from 'lucide-react'
 import { cls } from './ui'
 
-const ICONO = {
+export const NOTIF_ICONO = {
   mensaje: { Icon: MessageSquare, tone: 'bg-navy/8 text-navy' },
   presupuesto: { Icon: FileText, tone: 'bg-amber-50 text-amber-600' },
   solicitud: { Icon: Inbox, tone: 'bg-mint/25 text-navy' },
@@ -31,7 +32,8 @@ export const NOTIF_PROV = [
   { id: 5, tipo: 'confirmacion', titulo: 'Documento aprobado', texto: 'Tu CIF fue verificado correctamente.', tiempo: 'Ayer', leida: true },
 ]
 
-export function NotificationsBell({ items = NOTIF_ORG }) {
+export function NotificationsBell({ items = NOTIF_ORG, verTodasTo = '#' }) {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [shown, setShown] = useState(false)
   const [notifs, setNotifs] = useState(items)
@@ -72,7 +74,7 @@ export function NotificationsBell({ items = NOTIF_ORG }) {
             <div className="min-h-0 flex-1 overflow-y-auto">
               {notifs.length === 0 && <p className="px-4 py-10 text-center text-[12.5px] text-ink-muted">No tienes notificaciones.</p>}
               {notifs.map((n) => {
-                const { Icon, tone } = ICONO[n.tipo] ?? ICONO.mensaje
+                const { Icon, tone } = NOTIF_ICONO[n.tipo] ?? NOTIF_ICONO.mensaje
                 return (
                   <button key={n.id} onClick={() => marcarUna(n.id)} className={cls('flex w-full items-start gap-3 border-b border-gray-100 px-4 py-3 text-left transition-colors last:border-0 hover:bg-gray-50', !n.leida && 'bg-mint/[0.06]')}>
                     <span className={cls('flex h-9 w-9 shrink-0 items-center justify-center rounded-lg', tone)}><Icon size={16} strokeWidth={2} /></span>
@@ -90,7 +92,7 @@ export function NotificationsBell({ items = NOTIF_ORG }) {
             </div>
 
             <div className="border-t border-gray-200 px-4 py-2.5 text-center">
-              <button onClick={() => setOpen(false)} className="text-[12.5px] font-semibold text-navy transition-colors hover:underline">Ver todas las notificaciones</button>
+              <button onClick={() => { setOpen(false); navigate(verTodasTo) }} className="text-[12.5px] font-semibold text-navy transition-colors hover:underline">Ver todas las notificaciones</button>
             </div>
           </div>
         </>

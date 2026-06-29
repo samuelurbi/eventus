@@ -2,12 +2,28 @@ import { useState } from 'react'
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, CalendarDays, Users, Gift, LifeBuoy,
-  MessageSquare, Settings, Search, LogOut, Plus, Menu,
+  MessageSquare, Settings, LogOut, Plus, Menu, CalendarRange, Wallet,
 } from 'lucide-react'
 import Logo from '../components/Logo'
 import { cls } from '../components/ui'
 import { NotificationsBell, NOTIF_ORG } from '../components/NotificationsBell'
+import { GlobalSearch } from '../components/GlobalSearch'
+import { EVENTOS, PROVEEDORES } from '../data/mock'
 import { PageHeaderContext } from './pageHeader'
+
+const SEARCH_ITEMS = [
+  ...EVENTOS.map((e) => ({ group: 'Eventos', label: e.nombre, sub: e.lugar, to: `/organizador/eventos/${e.id}`, Icon: CalendarDays })),
+  ...PROVEEDORES.map((p) => ({ group: 'Proveedores', label: p.nombre, sub: p.categoria, to: `/organizador/proveedores/${p.id}`, Icon: Users })),
+  { group: 'Secciones', label: 'Dashboard', to: '/organizador', Icon: LayoutDashboard },
+  { group: 'Secciones', label: 'Mis Eventos', to: '/organizador/eventos', Icon: CalendarDays },
+  { group: 'Secciones', label: 'Calendario', to: '/organizador/calendario', Icon: CalendarRange },
+  { group: 'Secciones', label: 'Marketplace de proveedores', to: '/organizador/proveedores', Icon: Users },
+  { group: 'Secciones', label: 'Mensajes', to: '/organizador/mensajes', Icon: MessageSquare },
+  { group: 'Secciones', label: 'Pagos', to: '/organizador/pagos', Icon: Wallet },
+  { group: 'Secciones', label: 'Referidos', to: '/organizador/referidos', Icon: Gift },
+  { group: 'Secciones', label: 'Configuración', to: '/organizador/configuracion', Icon: Settings },
+  { group: 'Secciones', label: 'Ayuda', to: '/organizador/ayuda', Icon: LifeBuoy },
+]
 
 const NAV_GROUPS = [
   {
@@ -15,7 +31,9 @@ const NAV_GROUPS = [
     items: [
       { to: '/organizador', icon: LayoutDashboard, label: 'Dashboard', end: true },
       { to: '/organizador/eventos', icon: CalendarDays, label: 'Mis Eventos' },
+      { to: '/organizador/calendario', icon: CalendarRange, label: 'Calendario' },
       { to: '/organizador/proveedores', icon: Users, label: 'Proveedores' },
+      { to: '/organizador/pagos', icon: Wallet, label: 'Pagos' },
     ],
   },
   {
@@ -152,18 +170,9 @@ export default function DashboardLayout() {
 
           {/* Search + actions */}
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <div className="relative hidden w-52 sm:block">
-              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
-              <input
-                placeholder="Buscar…"
-                className="h-8 w-full rounded-lg border border-gray-200 bg-gray-100 pl-8 pr-10 text-[13px] text-ink-body placeholder:text-ink-subtle focus:border-navy-light focus:outline-none focus:ring-1 focus:ring-mint/40"
-              />
-              <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded bg-gray-200 px-1 py-0.5 text-[10px] font-medium text-ink-subtle">
-                ⌘K
-              </kbd>
-            </div>
+            <div className="hidden w-56 sm:block"><GlobalSearch items={SEARCH_ITEMS} placeholder="Buscar eventos, proveedores…" /></div>
 
-            <NotificationsBell items={NOTIF_ORG} />
+            <NotificationsBell items={NOTIF_ORG} verTodasTo="/organizador/notificaciones" />
 
             <div className="hidden h-7 w-7 items-center justify-center rounded-full bg-navy text-[11px] font-bold text-white sm:flex">
               SU

@@ -4,6 +4,7 @@ import { Search, Plus, MapPin, Users, ArrowRight } from 'lucide-react'
 import { EVENTOS } from '../../data/mock'
 import { themeFor, UNSPLASH, FMT, diasRestantes } from '../../data/theme'
 import { Badge } from '../../components/ui'
+import { SkeletonCard, useFakeLoad } from '../../components/Skeleton'
 import { usePageHeader } from '../../layouts/pageHeader'
 
 const ESTADOS = ['Todos', 'En curso', 'Planificación', 'Completado']
@@ -57,6 +58,7 @@ function EventCard({ e }) {
 export default function MisEventos() {
   const [estado, setEstado] = useState('Todos')
   const [q, setQ] = useState('')
+  const loading = useFakeLoad()
   usePageHeader('Mis eventos', `${EVENTOS.length} eventos en total`)
   const eventos = EVENTOS.filter((e) =>
     (estado === 'Todos' || e.estado === estado) &&
@@ -93,7 +95,8 @@ export default function MisEventos() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-3">
-        {eventos.map((e) => <EventCard key={e.id} e={e} />)}
+        {loading && [0, 1, 2].map((i) => <SkeletonCard key={`sk${i}`} />)}
+        {!loading && eventos.map((e) => <EventCard key={e.id} e={e} />)}
         <Link
           to="/organizador/eventos/nuevo"
           className="flex min-h-[260px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 bg-white text-ink-muted transition-colors hover:border-navy hover:text-navy"
